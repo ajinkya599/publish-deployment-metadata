@@ -20,5 +20,9 @@ jobs:
       - name: Post deployment metadata
         uses: ./action
         with:
+          target: la
+          log-type: 'deploymentMetadata'
           connection-string: ${{ secrets.AZ_APPINSIGHTS_CONNECTION_STRING }}
+          workspace-id: ${{ secrets.AZ_LA_WORKSPACE_ID }}
+          workspace-secret: ${{ secrets.AZ_LA_WORKSPACE_SECRET }}
           deployment-metadata-path: '.github/data/deployment-metadata.json'
