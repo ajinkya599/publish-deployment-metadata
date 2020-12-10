@@ -1,0 +1,24 @@
+name: Post deployment metadata to app insights
+
+on:
+  push:
+    branches: [ check ]
+    paths: [ .github/workflows/post-metadata.yml ]
+
+jobs:
+  post-logs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        name: Checkout action code
+        with:
+          ref: dev
+          path: action
+          
+      - name: Post deployment metadata
+        uses: ./action
+        with:
+          connection-string: ${{ secrets.AZ_APPINSIGHTS_CONNECTION_STRING }}
+          deployment-metadata-path: '.github/data/deployment-metadata.json'

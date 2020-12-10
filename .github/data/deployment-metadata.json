@@ -1,0 +1,50 @@
+{
+  "targetResource": {
+    "name": "contoso-k8s-cluster",
+    "id": "/subscriptions/c00d16c7-6c1f-4c03-9be1-6934a4c49682/resourceGroups/k8sRg/providers/Microsoft.ContainerService/managedClusters/contoso-k8s-cluster",
+    "type": "Microsoft.ContainerService/ManagedClusters",
+    "properties": {
+      "location": "westcentralus",
+      "namespace": "prod-wcus",
+      "kubernetesObjects": [
+        {
+          "kind": "service",
+          "url": "/api/v1/namespaces/prod-wcus/services/contoso-service"
+        },
+        {
+          "kind": "deployment",
+          "url": "/apis/apps/v1/namespaces/prod-wcus/deployments/contoso-deployment"
+        }
+      ]
+    }
+  },
+  "workflowRun": {
+    "repository": "contoso/contoso-app",
+    "workflow": "./github/workflow/cd.yml",
+    "run": "123",
+    "runUri": "https://github.com/contoso/contoso-app/actions/runs/123",
+    "createdBy": "contosoUser",
+    "branch": "release",
+    "jobName": "build-and-deploy",
+    "creationTimestamp": "2020-06-04T07:59:40Z",
+    "modifiedTimestamp": "2020-06-04T08:59:40Z",
+    "status": "success",
+    "commit": "870d8ae5d7558661d59c1d805d41fd53e43a9a6c",
+    "properties": {
+      "key1": "value1"
+    }
+  },
+  "artifacts": [
+    {
+      "type": "container",
+      "properties": {
+        "image": "my-acr.azurecr.io/my-image",
+        "dockerFile": "build/dockerfile",
+        "helm": "charts/charts.yaml",
+        "manifest": [
+          "manifest/manifest.yml"
+        ]
+      }
+    }
+  ]
+}
