@@ -1,0 +1,12 @@
+name: 'Publish deployment metadata to Azure'
+description: 'Publish deployment metadata to Azure'
+inputs:
+  connection-string:
+    description: 'Connection string'
+    required: true
+  deployment-metadata-path:
+    description: 'Path to the file containing deployment metadata'
+    required: true
+runs:
+  using: 'node12'
+  main: 'lib/run.js'

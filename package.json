@@ -1,0 +1,29 @@
+{
+  "name": "publish-deployment-metadata",
+  "version": "0.0.0",
+  "description": "GitHub action to publish deployment metadata to Azure",
+  "main": "run.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajinkya599/publish-deployment-metadata.git"
+  },
+  "author": "ajinkya599",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ajinkya599/publish-deployment-metadata/issues"
+  },
+  "homepage": "https://github.com/ajinkya599/publish-deployment-metadata#readme",
+  "devDependencies": {
+    "@types/node": "^14.11.1",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.5",
+    "@actions/exec": "^1.0.4",
+    "applicationinsights": "^1.8.7"
+  }
+}
