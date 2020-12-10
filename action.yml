@@ -3,10 +3,24 @@ description: 'Publish deployment metadata to Azure'
 inputs:
   connection-string:
     description: 'Connection string'
-    required: true
+    required: false
   deployment-metadata-path:
     description: 'Path to the file containing deployment metadata'
     required: true
+  target:
+    description: 'Resource to post the results to. Options - ai/la'
+    default: 'ai'
+    required: true
+  log-type:
+    description: 'Log type'
+    required: false
+  workspace-id:
+    description: 'Workspace ID'
+    required: false
+  workspace-secret:
+    description: 'Workspace secret'
+    required: false
+  
 runs:
   using: 'node12'
   main: 'lib/run.js'

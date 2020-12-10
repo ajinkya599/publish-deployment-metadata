@@ -1,9 +1,20 @@
 import * as core from '@actions/core';
 import * as fs from 'fs';
 let appInsights = require('applicationinsights');
+import * as fileHelper from './fileHelper';
+import * as AzureWorkspace from './azureWorkspace';
 
 async function run() {
   try {
+    await postDeploymentMetadata();
+  } catch (error) {
+    core.setFailed(error.message);
+  }
+}
+
+async function postDeploymentMetadata() {
+  const target = core.getInput('target');
+  if(target == 'ai') {
     const connectionString = core.getInput('connection-string', { required: true });
 
     appInsights.setup(connectionString);
@@ -17,29 +28,20 @@ async function run() {
     appInsightsClient.flush();
 
     console.log('Event posted!');
-  } catch (error) {
-    core.setFailed(error.message);
+  } else {
+    AzureWorkspace.postLogs();
   }
 }
 
 function getEventData(): any {
   const deploymentMetadataPath = core.getInput('deployment-metadata-path', { required: true });
-  const deploymentMetadata = getFileJson(deploymentMetadataPath)
+  const deploymentMetadata = fileHelper.getFileJson(deploymentMetadataPath)
   const eventData = {
     name: 'GitHub.CI.Deployment',
     properties: deploymentMetadata
   };
 
   return eventData
-}
-
-function getFileJson(path: string): any {
-  try {
-    const rawContent = fs.readFileSync(path, 'utf-8');
-    return JSON.parse(rawContent);
-  } catch (ex) {
-    throw new Error(`An error occured while parsing the contents of the file: ${path}. Error: ${ex}`);
-  }
 }
 
 run();
