@@ -11,7 +11,7 @@ async function run() {
 
     const eventData = getEventData();
     console.log('Posting event to Azure AppInsights...');
-    core.debug(`Event data: ${JSON.stringify(eventData)}`);
+    console.debug(`Event data: ${JSON.stringify(eventData)}`);
 
     appInsightsClient.trackEvent(eventData);
     appInsightsClient.flush();
